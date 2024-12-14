@@ -1,6 +1,7 @@
 import React from 'react'
 import passwordMeter from '../assets/password-meter.png'
 import streamMovies from '../assets/stream-movies.webp'
+import portfolioImage from '../assets/portfolio-image.jpg'
 
 function Portfolio() {
     const cards = [
@@ -17,6 +18,13 @@ function Portfolio() {
             name: "Streamify",
             description: "Streamify is a movie streaming platform that offers a seamless experience for watching and discovering a wide range of films.",
             code: "https://github.com/rathore0123/Streamify",
+        },
+        {
+            id: 3,
+            image: portfolioImage,
+            name: "Portfolio",
+            description: "Streamify is a movie streaming platform that offers a seamless experience for watching and discovering a wide range of films.",
+            code: "https://github.com/rathore0123/Portfolio",
         },
         
     ]
