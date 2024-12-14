@@ -4,21 +4,25 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function Contact() {
     const formRef = useRef(null);
+    const [isSubmitting, setIsSubmitting] = React.useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbw43hJ--Y7sFoJdcd1whdFlvMDvZo9n4zJgQvfGbQOg835cJ-mVAjgEhy4Msa9ZdvvRhQ/exec'; // Replace with your Google Sheets script URL
+        setIsSubmitting(true);
         const form = formRef.current;
-
-        fetch(scriptURL, {
+        fetch(`https://script.google.com/macros/s/AKfycbw43hJ--Y7sFoJdcd1whdFlvMDvZo9n4zJgQvfGbQOg835cJ-mVAjgEhy4Msa9ZdvvRhQ/exec`, {
             method: 'POST',
             body: new FormData(form),
         })
-            .then((response) => {
-                toast.success('Form submitted successfully!')
+            .then(() => {
+                toast.success('Form submitted successfully!');
             })
-            .catch((error) => {
+            .catch(() => {
                 toast.error('Form submission failed!');
+            })
+            .finally(() => {
+                setIsSubmitting(false);
+                form.reset();
             });
     };
     return (
@@ -37,8 +41,8 @@ function Contact() {
                                     type="text"
                                     placeholder='Enter your fullName'
                                     name="fullName"
-                                    id="fullName" 
-                                    required/>
+                                    id="fullName"
+                                    required />
                             </div>
                             <div className='flex flex-col mb-4'>
                                 <label className='cursor-pointer' htmlFor="email">Email</label>
@@ -47,8 +51,8 @@ function Contact() {
                                     type="email"
                                     placeholder='Enter your email'
                                     name="email"
-                                    id="email" 
-                                    required/>
+                                    id="email"
+                                    required />
                             </div>
                             <div className='flex flex-col mb-4'>
                                 <label className='cursor-pointer' htmlFor="message">Message</label>
@@ -57,14 +61,22 @@ function Contact() {
                                     type="text"
                                     placeholder='Enter your message'
                                     name="message"
-                                    id="message" 
-                                    required/>
+                                    id="message"
+                                    required />
                             </div>
-                            <button className='bg-black px-3 py-2 rounded-xl active:bg-slate-700 text-white text-sm' type="submit">Send</button>
+                            <button
+                                className={`bg-black px-3 py-2 rounded-xl ${isSubmitting ? 'opacity-50 cursor-not-allowed' : 'active:bg-slate-700'
+                                    } text-white text-sm`}
+                                type="submit"
+                                disabled={isSubmitting}
+                                aria-label="Send message"
+                            >
+                                {isSubmitting ? 'Sending...' : 'Send'}
+                            </button>
                         </form>
                     </div>
                 </div>
-            <ToastContainer />
+                <ToastContainer />
             </div>
             <hr />
         </>

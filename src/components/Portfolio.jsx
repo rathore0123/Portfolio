@@ -23,7 +23,7 @@ function Portfolio() {
             id: 3,
             image: portfolioImage,
             name: "Portfolio",
-            description: "Streamify is a movie streaming platform that offers a seamless experience for watching and discovering a wide range of films.",
+            description: "A personal portfolio website showcasing my skills, projects, and experience as a web developer, designed with a clean UI and responsive design for seamless user interaction.",
             code: "https://github.com/rathore0123/Portfolio",
         },
         
